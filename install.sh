@@ -1,10 +1,10 @@
 #!/bin/bash
 # One-line installer for BT Controller Emulator
-# Usage: curl -fsSL https://raw.githubusercontent.com/xXJSONDeruloXx/steamdeck-bt-controller-emulator/main/install.sh | bash
+# Usage: curl -fsSL https://raw.githubusercontent.com/hexabyte8/steamdeck-bt-controller-emulator/main/install.sh | bash
 
 set -euo pipefail
 
-REPO_URL="https://github.com/xXJSONDeruloXx/steamdeck-bt-controller-emulator.git"
+REPO_URL="https://github.com/hexabyte8/steamdeck-bt-controller-emulator.git"
 INSTALL_DIR="$HOME/steamdeck-bt-controller-emulator"
 
 echo "=== BT Controller Emulator - Installer ==="
@@ -175,6 +175,6 @@ echo "  2. Select Bluetooth or Wired USB mode"
 echo "  3. Click 'Start Service'"
 echo "  4. Connect from another device"
 echo
-echo "To update:  curl -fsSL https://raw.githubusercontent.com/xXJSONDeruloXx/steamdeck-bt-controller-emulator/main/install.sh | bash"
-echo "To uninstall: curl -fsSL https://raw.githubusercontent.com/xXJSONDeruloXx/steamdeck-bt-controller-emulator/main/uninstall.sh | bash"
+echo "To update:  curl -fsSL https://raw.githubusercontent.com/hexabyte8/steamdeck-bt-controller-emulator/main/install.sh | bash"
+echo "To uninstall: curl -fsSL https://raw.githubusercontent.com/hexabyte8/steamdeck-bt-controller-emulator/main/uninstall.sh | bash"
 echo
