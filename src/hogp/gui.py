@@ -669,6 +669,8 @@ class HoGPeripheralGUI(Gtk.ApplicationWindow):
         self._registered = False
         self._running = False
         self._update_timeout_id = None
+        self._mode = "bluetooth"
+        self._usb_gadget = None
         
         # Build UI
         self._build_ui()
