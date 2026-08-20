@@ -866,7 +866,7 @@ class GattApplication:
         self._registrations.append(reg_id)
 
     def _register_report_reference_desc(self) -> None:
-        """Register Report Reference descriptor (Report ID=0, Type=Input)."""
+        """Register Report Reference descriptor (Report ID=1, Type=Input)."""
         xml = f"""
         <node>
             <interface name="{GATT_DESC_IFACE}">
@@ -895,8 +895,8 @@ class GattApplication:
         path = f"{char_path}/desc0"
         node_info = Gio.DBusNodeInfo.new_for_xml(xml)
         
-        # Report Reference: Report ID = 0, Report Type = 1 (Input)
-        report_ref_value = bytes([0x00, 0x01])
+        # Report Reference: Report ID = 1, Report Type = 1 (Input)
+        report_ref_value = bytes([0x01, 0x01])
 
         def handler(conn, sender, obj_path, iface, method, params, invoc):
             if iface == GATT_DESC_IFACE:
