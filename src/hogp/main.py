@@ -147,7 +147,7 @@ class HoGPeripheral:
         signal.signal(signal.SIGTERM, self._signal_handler)
         
         # Setup input handler if input device specified or auto-detect enabled
-        if self.input_device or self.input_device != "none":
+        if self.input_device != "none":
             logger.info("Setting up physical input forwarding...")
             self._input_handler = InputHandler(
                 device_path=self.input_device if self.input_device != "auto" else None,
@@ -370,32 +370,32 @@ class HoGPeripheral:
         return False
 
     def _on_physical_button(self, button_index: int, pressed: bool) -> None:
-        """Callback for physical button events."""
+        """Callback for physical button events (called from evdev thread)."""
         if self._gatt_app and not self._shutting_down:
-            self._gatt_app.set_button(button_index, pressed)
             if self.verbose:
                 logger.debug(f"Physical button {button_index} {'pressed' if pressed else 'released'}")
+            GLib.idle_add(self._gatt_app.set_button, button_index, pressed)
 
     def _on_physical_axis(self, axis_index: int, value: int) -> None:
-        """Callback for physical axis events."""
+        """Callback for physical axis events (called from evdev thread)."""
         if self._gatt_app and not self._shutting_down:
-            self._gatt_app.set_axis(axis_index, value)
             if self.verbose:
                 logger.debug(f"Physical axis {axis_index} = {value}")
+            GLib.idle_add(self._gatt_app.set_axis, axis_index, value)
 
     def _on_physical_trigger(self, trigger_index: int, value: int) -> None:
-        """Callback for physical trigger events."""
+        """Callback for physical trigger events (called from evdev thread)."""
         if self._gatt_app and not self._shutting_down:
-            self._gatt_app.set_trigger(trigger_index, value)
             if self.verbose:
                 logger.debug(f"Physical trigger {trigger_index} = {value}")
+            GLib.idle_add(self._gatt_app.set_trigger, trigger_index, value)
 
     def _on_physical_hat(self, direction: int) -> None:
-        """Callback for physical HAT/D-pad events."""
+        """Callback for physical HAT/D-pad events (called from evdev thread)."""
         if self._gatt_app and not self._shutting_down:
-            self._gatt_app.set_hat(direction)
             if self.verbose:
                 logger.debug(f"Physical HAT = {direction:02X}")
+            GLib.idle_add(self._gatt_app.set_hat, direction)
 
     def _test_pattern_tick(self) -> bool:
         """Update test pattern state."""
